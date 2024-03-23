@@ -54,7 +54,7 @@ This can be done by serval IDEs like vscode, pgadmin and we can directly execute
 
 Once we create the tables we will find the relation between dim_customers and the Sales table based on the Customer_ID, ID column, we have used this relationship in Power BI reports.
 
-![alt text](./img/img1.PNG) 
+![alt text](./img/img1.png) 
 
 Once Db and table have been created in the Postgresql db, we can start the load of the data from the source.
 
@@ -71,14 +71,14 @@ in this project, we have three sources
 https://openweathermap.org/
 
 to use this API we need to register on the side and get an API key, which is free for limited requests for per day.
-![alt text](./img/img2.PNG) 
+![alt text](./img/img2.png) 
 
 Once we get this API key, we need to put this key in our code.
 Go to the below location in the directory and replace the key with your Key.
 
 .\AIQ project\code\AIQSales\Gettoken.py
 
-![alt text](./img/mg3.PNG) 
+![alt text](./img/mg3.png) 
 
 Note: I have placed a sample key, this key will not work for you.
 
@@ -107,7 +107,7 @@ all the logic has been built to bring weather details based on lat and long prov
 # Step3: Power BI reporting for Data Analysis and Finding Data Insights
 Once the data ingestion has been completed, we can load this data into the Power BI desktop and create a data model to create reports.
 
-![alt text](./img/img5.PNG)
+![alt text](./img/img5.png)
 
 Power bi supports Postgres SQL DB connection, so we do not need to install or make any configurations.
 All we will require is 
@@ -148,7 +148,7 @@ you can create a blank query in Power BI and paste this m query to create a date
 ## Create a model relationship
 after the power bi modelling part, we will create a relationship between sales, dim_customers and dim_date table.
 
-![alt text](./img/img1.PNG) 
+![alt text](./img/img1.png) 
 
 The relationship between tables will be as below:
 * dim_customer(ID) > sales(customer_ID) (one-to-many relationship)
@@ -158,7 +158,7 @@ Once the relationship has been completed, we will create the required measures t
 
 Note: we have marked the dim_date table as a date table in Power BI, so that we can utilize time intelligence functions.
 
-![alt text](./img/img6.PNG)
+![alt text](./img/img6.png)
 
 To analyze sales data we have created Power BI measures by using Dax functions.
 Dax functions are used to create Net sales, YTm, MTD, QTD and PYTD(previous year to date) sales, sales variance, variance % and etc.
@@ -178,15 +178,15 @@ The project's Final output we can see in the power BI Report, where we have perf
 This report can be shared with businesses and we can publish this report to power BI online services where the report will be refreshed at a scheduled time.
 
 ## AIQ Sales Analysis by Time
-![alt text](./img/img7.PNG)
+![alt text](./img/img7.png)
 
 ## Sales With Customer, City and Products
 
-![alt text](./img/img8.PNG)
+![alt text](./img/img8.png)
 
 ## AI Analysts of Sales With Weather
 
-![alt text](./img/img9.PNG)
+![alt text](./img/img9.png)
 
 
 
