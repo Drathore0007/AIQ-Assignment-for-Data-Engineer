@@ -14,30 +14,30 @@ analysis and derive insights into customer behaviour and sales performance.
 
 ### Solution Details:
 
-This Git repo holds the script for Sala data ingestion, script are developed in python and ingesting the data in the PostgreSQL DB.
+This Git repo holds the script for Sala data ingestion, The script is developed in Python and ingests the data in the PostgreSQL DB.
 
 
-* Code: AIQ_APIs Codes (folder where all your code resides)
+* Code: AIQ_APIs Codes (the folder where all your code resides)
     * __init__.py
-* setup.py (file required to create a egg package)
+* setup.py (file required to create an egg package)
 * requirement.txt (detail  of required module in this project)
-* output Folder: this folder holds all csv and psdf file , both files are exported inthe end of the project.
-* DataFiles: This folder contains sales csv file which is being used in the notebooks code.
-* Power BI report: this folder has PBix file which was developed by sourcing data from postgresql db. 
+* output Folder: this folder holds all csv and pdf files, both files are exported at the end of the project.
+* DataFiles: This folder contains sales csv file which is being used in the notebook's code.
+* Power BI report: this folder has a PBix file which was developed by sourcing data from Postgresql db. 
 
-when you create a new project with this script, you will get a folder with project name inside the path you have give with below file in it.
+when you create a new project with this script, you will get a folder with the project name inside the path you have given with the below file in it.
 
 
 ## Preinstallation required:
-* Window or Ubuntu machine wiht jupyter notebook
+* Window or Ubuntu machine with jupyter notebook
 * Python 3.7.x or above
 * Postgresql 13 or above
 
 
 ### Step1: Set up Postgres DB
-To set up the noteboo on your environment, you need to have a postgresql server and you must have a user who has create db, schema and tables permisions.
+To set up the notebook on your environment, you need to have a Postgresql server and you must have a user who has created db, schema and tables permissions.
 
-Once you have a database and user, we need to connect to database and run the the scrit given in  the 
+Once you have a database and user, we need to connect to the database and run the script given in  the 
 ```
 .\AIQ project\code\SQL\createdb.sql
 .\AIQ project\code\SQL\createtables.sql
@@ -52,74 +52,74 @@ This can be done by serval IDEs like vscode, pgadmin and we can directly execute
 ```
 [Set-Up-DB notebook](/code/SetUpDB.ipynb)
 
-Once we create the tables we will find the relation between dim_customers and Sales table based on Customer_ID, ID column, we have use this relationship in power bi reporting.
+Once we create the tables we will find the relation between dim_customers and the Sales table based on the Customer_ID, ID column, we have used this relationship in Power BI reports.
 
-![alt text](./img/img1.PNG) 
+![alt text](.\img\img1.PNG) 
 
-Once Db and table have been created in the postgresql db, we can start the load of the data from the source.
+Once Db and table have been created in the Postgresql db, we can start the load of the data from the source.
 
-### Step2: Running the Notebooks.
+### Step 2: Running the Notebooks.
 
-in this project we have three sources
-* Sales csv file:  This file can be found in below location
+in this project, we have three sources
+* Sales CSV file:  This file can be found in the below location
   
   C:\Users\dharm\Desktop\Projects\AIQ project\DataFiles\AIQSalesData.csv
 
-* User/Customer Data: this data is nested json data which can be found at given url https://jsonplaceholder.typicode.com/users 
+* User/Customer Data: this data is nested JSON data which can be found at the given URL https://jsonplaceholder.typicode.com/users 
 
-* Weather Data: this is our third source of data which we will extract from Openweather source.
+* Weather Data: this is our third source of data which we will extract from the Openweather source.
 https://openweathermap.org/
 
-to user this API we need to register on the side and get APIkey, which is free for limitted requests for per day.
-![alt text](./img/img2.PNG) 
+to use this API we need to register on the side and get an API key, which is free for limited requests for per day.
+![alt text](.\img\img2.PNG) 
 
-Once we get this APIkey, we need to put this key in our code.
-Goto below location in the directory and replace the key with your Key.
+Once we get this API key, we need to put this key in our code.
+Go to the below location in the directory and replace the key with your Key.
 
 .\AIQ project\code\AIQSales\Gettoken.py
 
-![alt text](./img/img3.PNG) 
+![alt text](.\img\img3.PNG) 
 
-Note: i have places a samplekey, this key will not work for you.
+Note: I have placed a sample key, this key will not work for you.
 
 
 # Step 2.A: Load dim_Customers
-To load the data from dim_customers table, we will need to execute 
+To load the data from the dim_customers table, we will need to execute 
 
 [Customer_Load](/code/Customer_Load.ipynb)
 
 Execute this notebook in vscode or jupyter notebook. 
-once notebook run successfully , we can validate the data in the postgres db.
+once the notebook runs successfully, we can validate the data in the Postgres DB.
 
-### Note: Customer data load have been performed with upsert method. we have stage table to hold new customers details and all stage data gets into main dimenstion table by using SCD type-2 insertion.
+### Note: Customer data load have been performed with the upsert method. we have a stage table to hold new customers' details and all stage data gets into the main dimension table by using SCD type-2 insertion.
 
 
 
 # Step2.B: Load Sales data with weather details.
 To load sales data with weather details we will use LoadSales.ipynb notebook.
 
-all the logic have been built to bring weather details based on lat and long provided in the dim_customers table.
+all the logic has been built to bring weather details based on lat and long provided in the dim_customers table.
 
 [Load Sales Table](/code/LoadSales.ipynb)
 
-### Note: Sales data load have been performed with Delete-Insert method. we have stage table to hold incomming sales details and all stage data gets into main sales fact table by sing SCD type-1 insertion. This is performed due to some complexcity faced due to  sales order id having multiple rows in the sales flat file
+### Note: Sales data loads have been performed with the Delete-Insert method. we have a stage table to hold incoming sales details and all stage data gets into the main sales fact table by sing SCD type-1 insertion. This is performed due to some difficulties faced due to  the sales order ID having multiple rows in the sales flat file
 
-# Step3: Power BI reporting for Data Analysis and Finsing Data Insights
-Once the data ingestion have been completed, we can load this data into power bi desktop and create data model to create reports.
+# Step3: Power BI reporting for Data Analysis and Finding Data Insights
+Once the data ingestion has been completed, we can load this data into the Power BI desktop and create a data model to create reports.
 
 ![alt text](./img/img5.PNG)
 
-Power bi support postgres sql db connection, so we do not need to installor make any configurations.
+Power bi supports Postgres SQL DB connection, so we do not need to install or make any configurations.
 All we will require is 
 * server name (localhost)
 * database name (AIG)
 * user (postgres)
-* password ()
+* Password ()
 
 ### Date table addition.
-as we did not load any date table in the system and we will require the dim_date table to perform data analysis on time dimention.
+as we did not load any date table in the system and we will require the dim_date table to perform data analysis on time dimension.
 
-We have create a dim_date table in the power bi with M query.
+We have created a dim_date table in the power BI with M query.
 
 ``` m query
 let
@@ -143,26 +143,26 @@ in
 
 ```
 
-you can create a blankquery in power bi and past this m query to create a date table.
+you can create a blank query in Power BI and paste this m query to create a date table.
 
-## Create model relationship
-after power bi modeling part, we will create a relationship between sales, dim_customers and dim_date table.
+## Create a model relationship
+after the power bi modelling part, we will create a relationship between sales, dim_customers and dim_date table.
 
 ![alt text](./img/img1.PNG) 
 
-Relationship between tables will be as below:
+The relationship between tables will be as below:
 * dim_customer(ID) > sales(customer_ID) (one-to-many relationship)
 * dim_date(date) > sales(order_date) (one-to-many relationship)
 
-Once the relationship have been completed, we will create required measures to perform the analysis.
+Once the relationship has been completed, we will create the required measures to perform the analysis.
 
-Note: we have marked dim_date table as date table in power bi, so that we can utilize time inteligence functions.
+Note: we have marked the dim_date table as a date table in Power BI, so that we can utilize time intelligence functions.
 
 ![alt text](./img/img6.PNG)
 
-To analyze sales data we have create power bi measures by using dax functions.
-Dax function are used to create Net sales, YTm, MTD, QTD and PYTD( previoous year to date) sales, sales variance, variance % and etc.
-This all DAX formula can be found in the power bi report mentioned below.
+To analyze sales data we have created Power BI measures by using Dax functions.
+Dax functions are used to create Net sales, YTm, MTD, QTD and PYTD(previous year to date) sales, sales variance, variance % and etc.
+These DAX formulas can be found in the power BI report mentioned below.
 
 Power bi Report PDF Sample: [AIQ Sales Analysis](/outputfiles/AIQSalesAnalysis.pdf)
 
@@ -170,12 +170,12 @@ Power BI report details: [AIQ Sales Analysis](/outputfiles/AIQSalesAnalysis.htm)
 
 
 ## Results:
-After everythin get completed we can see that all notebook are running as weexpected and this can be schedule with help of any cloud tools like
+After everything get completed we can see that all notebooks are running as expected and this can be scheduled with help of any cloud tools like
 Azure Synapse, Azure ADF, Azure Databricks, AWS glue, Airflow and etc.
 
 
-Project Final output we can see in the power Bi Report, where we have performed the analysis.
-This report can be shared with business and we can publish this report to power bi online services where report will be refresh on a schedule time.
+The project's Final output we can see in the power BI Report, where we have performed the analysis.
+This report can be shared with businesses and we can publish this report to power BI online services where the report will be refreshed at a scheduled time.
 
 ## AIQ Sales Analysis by Time
 ![alt text](./img/img7.PNG)
@@ -190,26 +190,26 @@ This report can be shared with business and we can publish this report to power 
 
 
 
-# Extra Step to create Egg and whl file for moving the code to cloud.
+# Extra Step to create Egg and WHL file for moving the code to the cloud.
 
-#### To Create EGG file from package
-* To create your app or to create EGG file use below command in project folder.  
+#### To Create an EGG file from the package
+* To create your app or to create an EGG file use the below command in the project folder.  
   $ *python setup.py bdist_egg* 
 
-you need to be in you AIQ Project folder directory to build your app with python. this command will create a folder name Dist in you project directory and egg_file_package will be inside that folder.
+you need to be in your AIQ Project folder directory to build your app with Python. this command will create a folder named Dist in your project directory and egg_file_package will be inside that folder.
 
 
-#### Submiting application
+#### Submitting application
 pip wheel --wheel-dir=wheels -r requirements.txt
 
-# Download all the wheel file of packages:
-pip download -r requirements.txt -d C:\Users\dharm\Desktop\LDH_Development\Codes\env\Package
+# Download all the wheel files of packages:
+pip download -r requirements.txt -d .\Codes\env\Package
 
-# Download package from specfic location
-pip install -r requirements.txt --no-index --find-links C:\Users\dharm\Desktop\LDH_Development\Codes\env\Package
+# Download package from specific location
+pip install -r requirements.txt --no-index --find-links .\Codes\env\Package
 
-pip install -r requirements.txt  ./LDHPackage-1.0.4.tar.gz
+pip install -r requirements.txt  
 
-# Install all package in spefic dir:
+# Install all packages in spefic dir:
 pip install --prefix=C:\Users\dharm\Desktop\LDH_Development\Codes\env\Package -r requirements.txt 
 
