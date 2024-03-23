@@ -54,7 +54,7 @@ This can be done by serval IDEs like vscode, pgadmin and we can directly execute
 
 Once we create the tables we will find the relation between dim_customers and the Sales table based on the Customer_ID, ID column, we have used this relationship in Power BI reports.
 
-![alt text](\img\img1.PNG) 
+![alt text](./img/img1.PNG) 
 
 Once Db and table have been created in the Postgresql db, we can start the load of the data from the source.
 
@@ -71,14 +71,14 @@ in this project, we have three sources
 https://openweathermap.org/
 
 to use this API we need to register on the side and get an API key, which is free for limited requests for per day.
-![alt text](.\img\img2.PNG) 
+![alt text](./img/img2.PNG) 
 
 Once we get this API key, we need to put this key in our code.
 Go to the below location in the directory and replace the key with your Key.
 
 .\AIQ project\code\AIQSales\Gettoken.py
 
-![alt text](\img\img3.PNG) 
+![alt text](./img/mg3.PNG) 
 
 Note: I have placed a sample key, this key will not work for you.
 
