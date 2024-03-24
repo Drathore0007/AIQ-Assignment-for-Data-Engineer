@@ -80,7 +80,7 @@ Go to the below location in the directory and replace the key with your Key.
 
 .\AIQ project\code\AIQSales\Gettoken.py
 
-![alt text](./img/mg3.png) 
+![alt text](./img/img3.png) 
 
 Note: I have placed a sample key, this key will not work for you.
 
