@@ -63,7 +63,9 @@ Once Db and table have been created in the Postgresql db, we can start the load 
 in this project, we have three sources
 * Sales CSV file:  This file can be found in the below location
   
-  C:\Users\dharm\Desktop\Projects\AIQ project\DataFiles\AIQSalesData.csv
+  .\AIQ project\DataFiles\AIQSalesData.csv
+
+[AIQ Sales Data CSV](/DataFiles/AIQSalesData.csv)
 
 * User/Customer Data: this data is nested JSON data which can be found at the given URL https://jsonplaceholder.typicode.com/users 
 
